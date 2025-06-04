@@ -1,8 +1,24 @@
-function stringChop(str, size) {
-  // your code here
+function chunkString(str, length) {
+  if (!str) return [];
+
+  const chunks = [];
+  for (let i = 0; i < str.length; i += length) {
+    chunks.push(str.slice(i, i + length));
+  }
+
+  return chunks;
 }
 
-// Do not change the code below
-const str = prompt("Enter String.");
-const size = prompt("Enter Chunk Size.");
-alert(stringChop(str, size));
+function chunkAndDisplay() {
+  const inputStr = document.getElementById("inputString").value;
+  const chunkSize = parseInt(document.getElementById("chunkLength").value);
+  const resultDiv = document.getElementById("result");
+
+  if (!chunkSize || chunkSize <= 0) {
+    resultDiv.textContent = "Please enter a valid chunk size (positive integer).";
+    return;
+  }
+
+  const result = chunkString(inputStr, chunkSize);
+  resultDiv.textContent = `Chunks: [${result.map(chunk => `"${chunk}"`).join(', ')}]`;
+}
